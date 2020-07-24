@@ -25,7 +25,7 @@ def home_view(request, *args, **kwargs):
 #@authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
-    serializer = TweetCreateSerializer(data = request.POST)
+    serializer = TweetCreateSerializer(data = request.data)
     if serializer.is_valid(raise_exception=True) :
         serializer.save(user = request.user)
         return Response(serializer.data,status=201)
@@ -34,6 +34,9 @@ def tweet_create_view(request, *args, **kwargs):
 @api_view(['GET'])
 def tweet_list_view(request, *args, **kwargs) :
     qs = Tweet.objects.all()
+    username = request.GET.get('username')
+    if username != None :
+        qs = qs.filter(user__username__iexact=username)
     serializer = TweetSerializer(qs,many = True)
     return Response(serializer.data)
 
