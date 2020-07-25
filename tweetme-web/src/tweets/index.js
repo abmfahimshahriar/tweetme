@@ -1,4 +1,4 @@
-import {TweetsComponent} from './components'
+import {TweetsComponent,TweetDetailComponent} from './components'
 import {TweetsList} from './list'
 import {Tweet} from './detail'
 import {TweetCreate} from './create'
@@ -9,5 +9,6 @@ export {
     Tweet,
     TweetCreate,
     TweetsList,
-    TweetsComponent
+    TweetsComponent,
+    TweetDetailComponent
 }
